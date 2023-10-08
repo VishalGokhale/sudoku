@@ -13,5 +13,5 @@ def update_with_candidate_digits_for_cell_method(arr):
             missing = [x for x in range(1, 10) if x not in known_vals]
             # print(f"{i, j} -- {missing=}")
             if len(missing) == 1:
-                print(f"updating {i, j}")
+                # print(f"updating {i, j}")
                 arr[i, j] == missing[0]

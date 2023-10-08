@@ -98,7 +98,7 @@ def update_with_candidate_cells_for_digit_method(arr, candidates):
 
                 arr[cell_row_index, cell_column_index] = digit
                 to_be_popped.append((smr, smc))
-                print(f"Updating {digit=} in {(smr, smc)=} at {(cell_row_index, cell_column_index)=}")
+                # print(f"Updating {digit=} in {(smr, smc)=} at {(cell_row_index, cell_column_index)=}")
 
         for (smr, smc) in to_be_popped:
             candidates[digit].pop((smr, smc))
