@@ -47,5 +47,5 @@ if __name__ == '__main__':
     arr = np.where(arr == None, '', arr)
     output_df = pd.DataFrame(arr)
     print(output_df)
-    # output_df.to_excel(r'output_int2.xlsx')
+    output_df.to_excel(r'output_very hard-partial.xlsx')
     # print(f"==========\n{arr}\n==============")
