@@ -34,18 +34,28 @@ def digit_present_in_submat(arr, digit, smc, smr):
 
 
 def smrow_and_smcol(smr, smc):
-    sm_row = [(smr, i) for i in range(3) if i != smc]
-    sm_col = [(j, smc) for j in range(3) if j != smr]
+    sm_row = row_neighbors(smr, smc)
+    sm_col = col_neighbors(smr, smc)
     return list(set(sm_row + sm_col))
+
+
+def col_neighbors(smr, smc):
+    sm_col = [(j, smc) for j in range(3) if j != smr]
+    return sm_col
+
+
+def row_neighbors(smr, smc):
+    sm_row = [(smr, i) for i in range(3) if i != smc]
+    return sm_row
 
 
 def update_with_candidate_cells_for_digit_method(arr, candidates):
     # submats = [(r, c) for r in range(3) for c in range(3)]
     for digit in range(1, 10):
-        print(f"\n\n=======  {digit}  =======\n")
+        # print(f"\n\n=======  {digit}  =======\n")
         to_be_popped = []
         for (smr, smc), cells in candidates[digit].items():
-            print(f"{smr, smc} --> {cells=}")
+            # print(f"submat: {(smr, smc)}    -->    candidate_{cells=}")
             cells_copy = deepcopy(cells)
             # cells_copy = []
             v_and_h_submats = smrow_and_smcol(smr, smc)
