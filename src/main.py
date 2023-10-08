@@ -20,9 +20,9 @@ def update_arr(arr, candidates):
 
 def remove_candidates_by_rows_columns(candidates, arr):
     for digit in range(1, 10):
-        if digit==3:
-            print(f"case ")
         for (smr, smc), cells in candidates[digit].items():
+            if digit == 3 and smr == 0 and smc == 2:
+                print(f"{arr[8, 1]=}")
             for c in cells:
                 # row_coord = c[0]
                 other_cells_in_same_row = [x for x in cells if x[0] == c[0] and x[1] != c[1]]
@@ -51,8 +51,9 @@ if __name__ == '__main__':
         candidates = candidate_cells_for_digit(arr)
         update_with_candidate_cells_for_digit_method(arr, candidates)
         remove_candidates_impacted_by_linear_alignment(candidates)
-        # remove_candidates_by_rows_columns(candidates, arr)
         update_arr(arr, candidates)
+        candidates = candidate_cells_for_digit(arr)
+        remove_candidates_by_rows_columns(candidates, arr)
 
         if np.array_equal(arr_copy, arr):
             print(f"{iterations = } completed\n\nNo updates compared to previous state, exiting...")
