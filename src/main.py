@@ -38,8 +38,8 @@ if __name__ == '__main__':
         candidates = candidate_cells_for_digit(arr)
         remove_candidates_by_cols(candidates, arr)
         candidates = candidate_cells_for_digit(arr)
-        remove_candidates_by_implicit_certainty(candidates)
-
+        remove_candidates_by_implicit_certainty(candidates, arr)
+        candidates = candidate_cells_for_digit(arr)
 
         if np.array_equal(arr_copy, arr):
             print(f"{iterations = } completed\n\nNo updates compared to previous state, exiting...")
@@ -50,5 +50,5 @@ if __name__ == '__main__':
     arr = np.where(arr == None, '', arr)
     output_df = pd.DataFrame(arr)
     print(output_df)
-    # output_df.to_excel(r'output_very hard-partial.xlsx')
+    output_df.to_excel(r'output - hard partial 2.xlsx')
     # print(f"==========\n{arr}\n==============")
