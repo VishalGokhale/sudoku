@@ -5,19 +5,10 @@ import pandas as pd
 
 from candidate_cells_for_digit import candidate_cells_for_digit, update_with_candidate_cells_for_digit_method
 from candidate_digits_for_cell import update_with_candidate_digits_for_cell_method
-from helper import read_input
+from helper import read_input, update_arr
 from implicit_certainty import remove_candidates_by_implicit_certainty
 from linear_alignment import remove_candidates_impacted_by_linear_alignment
 from stage3 import remove_candidates_by_rows, remove_candidates_by_cols
-
-
-def update_arr(arr, candidates):
-    for digit in range(1, 10):
-        for _, cells in candidates[digit].items():
-            if len(cells) == 1:
-                cell = cells[0]
-                arr[cell[0], cell[1]] = digit
-
 
 if __name__ == '__main__':
     arr = read_input()

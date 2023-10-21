@@ -27,3 +27,11 @@ def candidates_reverse(candidates):
             reversed_candidates[submat].append(d)
 
     return reversed_candidates
+
+
+def update_arr(arr, candidates):
+    for digit in range(1, 10):
+        for _, cells in candidates[digit].items():
+            if len(cells) == 1:
+                cell = cells[0]
+                arr[cell[0], cell[1]] = digit

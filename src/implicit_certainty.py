@@ -1,4 +1,4 @@
-from helper import dict_print, candidates_reverse
+from helper import dict_print, candidates_reverse, update_arr
 
 
 def remove_candidates_by_implicit_certainty(candidates, arr):
@@ -38,9 +38,5 @@ def remove_candidates_by_implicit_certainty(candidates, arr):
                     if ct in candidates[x][(smr, smc)]:
                         candidates[x][(smr, smc)].remove(ct)
 
-    for d in range(1, 10):
-        for _, cells in candidates[d].items():
-            if len(cells) == 1:
-                print(f"Updating arr, setting {d=} in position {cells[0]}")
-                arr[cells[0][0], cells[0][1]] = d
+    update_arr(arr, candidates)
 
