@@ -1,3 +1,6 @@
+import json
+from pprint import pprint
+
 import numpy as np
 import pandas as pd
 
@@ -9,3 +12,19 @@ def read_input():
     arr = np.where(arr == -1, None, arr)
     # print(arr)
     return arr
+
+
+def dict_print(dict_to_print):
+    print("=" * 40)
+    pprint(dict_to_print)
+    print("=" * 40)
+
+
+def candidates_reverse(candidates):
+    reversed_candidates = {(smr, smc): [] for smr in range(3) for smc in range(3)}
+    for d in range(1, 10):
+        submats = list(candidates[d].keys())
+        for submat in submats:
+            reversed_candidates[submat].append(d)
+
+    return reversed_candidates
