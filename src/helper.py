@@ -23,8 +23,7 @@ def dict_print(dict_to_print):
 def candidates_reverse(candidates):
     reversed_candidates = {(smr, smc): [] for smr in range(3) for smc in range(3)}
     for d in range(1, 10):
-        submats = list(candidates[d].keys())
-        for submat in submats:
+        for submat in list(candidates[d].keys()):
             reversed_candidates[submat].append(d)
 
     return reversed_candidates

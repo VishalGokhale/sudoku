@@ -6,7 +6,7 @@ import pandas as pd
 from candidate_cells_for_digit import candidate_cells_for_digit, update_with_candidate_cells_for_digit_method
 from candidate_digits_for_cell import update_with_candidate_digits_for_cell_method
 from helper import read_input
-from implicit_certainty_durri import remove_candidates_by_implicit_certainty_2
+from implicit_certainty import remove_candidates_by_implicit_certainty
 from linear_alignment import remove_candidates_impacted_by_linear_alignment
 from stage3 import remove_candidates_by_rows, remove_candidates_by_cols
 
@@ -38,7 +38,7 @@ if __name__ == '__main__':
         candidates = candidate_cells_for_digit(arr)
         remove_candidates_by_cols(candidates, arr)
         candidates = candidate_cells_for_digit(arr)
-        remove_candidates_by_implicit_certainty_2(candidates, arr)
+        remove_candidates_by_implicit_certainty(candidates, arr)
         candidates = candidate_cells_for_digit(arr)
 
         if np.array_equal(arr_copy, arr):
@@ -50,5 +50,5 @@ if __name__ == '__main__':
     arr = np.where(arr == None, '', arr)
     output_df = pd.DataFrame(arr)
     print(output_df)
-    output_df.to_excel(r'output - hard partial 3.xlsx')
+    # output_df.to_excel(r'output - hard partial 3.xlsx')
     # print(f"==========\n{arr}\n==============")

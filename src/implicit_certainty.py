@@ -1,27 +1,46 @@
+from helper import dict_print, candidates_reverse
+
+
 def remove_candidates_by_implicit_certainty(candidates, arr):
-    digits_with_only_2_candidates_in_submat = {}
+    digits_with_candidates_in_submat = {}
     for digit in range(1, 10):
         for (smr, smc), cells in candidates[digit].items():
-            if len(cells) == 2:
-                cands = digits_with_only_2_candidates_in_submat.get((smr, smc))
-                if not cands:
-                    digits_with_only_2_candidates_in_submat[(smr, smc)] = []
-                digits_with_only_2_candidates_in_submat[(smr, smc)].append(digit)
+            cands = digits_with_candidates_in_submat.get((smr, smc))
+            if not cands:
+                digits_with_candidates_in_submat[(smr, smc)] = []
+            digits_with_candidates_in_submat[(smr, smc)].append(digit)
 
-    submats_with_2d_2c = {k: v for k, v in digits_with_only_2_candidates_in_submat.items() if len(v) == 2}
+    dict_print(digits_with_candidates_in_submat)
+    candidates_reversed = candidates_reverse(candidates)
 
-    for (smr, smc), digits in submats_with_2d_2c.items():
-        first_digit_cands = candidates[digits[0]][smr, smc]
-        second_digit_cands = candidates[digits[1]][smr, smc]
-        if set(first_digit_cands) == set(second_digit_cands):
-            for cell in first_digit_cands:
-                for digit in range(1, 10):
-                    if digit not in digits \
-                            and (smr, smc) in candidates[digit] \
-                            and cell in candidates[digit][(smr, smc)]:
-                        print(f"removing -->  {cell} from {digit=}, {(smr, smc)=}")
-                        candidates[digit][(smr, smc)].remove(cell)
-                        if len(candidates[digit][(smr, smc)]) == 1:
-                            arr[cell[0], cell[1]] = digit
-                            print(f"updated{cell=}, {digit}")
-    print(f"{digits_with_only_2_candidates_in_submat=}")
+    d_gangs = {}
+    for (smr, smc), digits in candidates_reversed.items():
+        d_gangs[(smr, smc)] = {}
+        for d in digits:
+            d_gang = [d]
+            for d_2 in digits:
+                if d != d_2 and set(candidates[d][(smr, smc)]) == set(candidates[d_2][(smr, smc)]):
+                    d_gang.append(d_2)
+            if len(d_gang) == len(candidates[d][(smr, smc)]):
+                d_gangs[(smr, smc)][tuple(candidates[d][(smr, smc)])] = d_gang
+
+    d_gangs = {k: v for k, v in d_gangs.items() if v}
+    dict_print(d_gangs)
+    dict_print(candidates_reversed)
+
+    for (smr, smc), d_g in d_gangs.items():
+        for cell_tuples, digits in d_g.items():
+            a = set(digits)
+            b = set(candidates_reversed[(smr, smc)])
+            c = b - a
+            for x in c:
+                for ct in cell_tuples:
+                    if ct in candidates[x][(smr, smc)]:
+                        candidates[x][(smr, smc)].remove(ct)
+
+    for d in range(1, 10):
+        for _, cells in candidates[d].items():
+            if len(cells) == 1:
+                print(f"Updating arr, setting {d=} in position {cells[0]}")
+                arr[cells[0][0], cells[0][1]] = d
+
