@@ -38,5 +38,5 @@ def remove_candidates_by_implicit_certainty(candidates, arr):
                     if ct in candidates[x][(smr, smc)]:
                         candidates[x][(smr, smc)].remove(ct)
 
-    update_arr(arr, candidates)
+
 

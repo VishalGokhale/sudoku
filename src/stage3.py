@@ -4,8 +4,6 @@ from candidate_cells_for_digit import row_neighbors, col_neighbors
 def remove_candidates_by_rows(candidates, arr):
     for digit in range(1, 10):
         for (smr, smc), cells in candidates[digit].items():
-            if digit == 3 and smr == 0 and smc == 2:
-                print(f"{arr[8, 1]=}")
             for c in cells:
                 # row_coord = c[0]
                 other_cells_in_same_row = [x for x in cells if x[0] == c[0] and x[1] != c[1]]
@@ -24,8 +22,6 @@ def remove_candidates_by_rows(candidates, arr):
 def remove_candidates_by_cols(candidates, arr):
     for digit in range(1, 10):
         for (smr, smc), cells in candidates[digit].items():
-            if digit == 3 and smr == 0 and smc == 2:
-                print(f"{arr[8, 1]=}")
             for c in cells:
                 # row_coord = c[0]
                 other_cells_in_same_col = [x for x in cells if x[1] == c[1] and x[0] != c[0]]

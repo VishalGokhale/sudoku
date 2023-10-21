@@ -30,6 +30,7 @@ if __name__ == '__main__':
         remove_candidates_by_cols(candidates, arr)
         candidates = candidate_cells_for_digit(arr)
         remove_candidates_by_implicit_certainty(candidates, arr)
+        update_arr(arr, candidates)
         candidates = candidate_cells_for_digit(arr)
 
         if np.array_equal(arr_copy, arr):
