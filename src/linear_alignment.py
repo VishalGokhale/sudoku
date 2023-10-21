@@ -10,13 +10,10 @@ def remove_candidates_from_neighboring_submats(row_col_coord, candidates, remove
             for c in cells:
                 if c[row_or_col] == row_col_coord:
                     candidates[digit][(smr, smc)].remove(c)
-                    # print(f"Removing for {digit} --> {c}")
 
 
 def remove_candidates_impacted_by_linear_alignment(candidates):
     for digit in range(1, 10):
-        # if digit == 9:
-        #     print('9 case')
         for (smr, smc), cells in candidates[digit].items():
             if 1 < len(cells) <= 3:
                 row_coords = [c[0] for c in cells]
@@ -30,5 +27,3 @@ def remove_candidates_impacted_by_linear_alignment(candidates):
                 if f_cell_col_copies == col_coords:
                     remove_from = col_neighbors(smr, smc)
                     remove_candidates_from_neighboring_submats(col_coords[0], candidates, remove_from, digit, 1)
-
-            # print(f'{(smr, smc)=}')
