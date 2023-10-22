@@ -1,4 +1,3 @@
-import json
 from pprint import pprint
 
 import numpy as np
@@ -35,3 +34,22 @@ def update_arr(arr, candidates):
             if len(cells) == 1:
                 cell = cells[0]
                 arr[cell[0], cell[1]] = digit
+
+
+def reverse_map(candidates):
+    reversed_map = {(r, c): [] for r in range(9) for c in range(9)}
+    for d in range(1, 10):
+        for _, cells in candidates[d].items():
+            for cell in cells:
+                reversed_map[cell].append(d)
+    reversed_map = {k: v for k, v in reversed_map.items() if v}
+    # dict_print(reversed_map)
+    # dict_print(candidates)
+    return reversed_map
+
+
+def update_arr_using_reversed_map(candidates, arr):
+    reversed_map = reverse_map(candidates)
+    for cell, digits in reversed_map.items():
+        if len(digits) == 1:
+            arr[cell[0], cell[1]] = digits[0]

@@ -10,7 +10,7 @@ def remove_candidates_by_implicit_certainty(candidates, arr):
                 digits_with_candidates_in_submat[(smr, smc)] = []
             digits_with_candidates_in_submat[(smr, smc)].append(digit)
 
-    dict_print(digits_with_candidates_in_submat)
+    # dict_print(digits_with_candidates_in_submat)
     candidates_reversed = candidates_reverse(candidates)
 
     d_gangs = {}
@@ -25,8 +25,8 @@ def remove_candidates_by_implicit_certainty(candidates, arr):
                 d_gangs[(smr, smc)][tuple(candidates[d][(smr, smc)])] = d_gang
 
     d_gangs = {k: v for k, v in d_gangs.items() if v}
-    dict_print(d_gangs)
-    dict_print(candidates_reversed)
+    # dict_print(d_gangs)
+    # dict_print(candidates_reversed)
 
     for (smr, smc), d_g in d_gangs.items():
         for cell_tuples, digits in d_g.items():
