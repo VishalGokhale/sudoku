@@ -3,24 +3,52 @@ from openpyxl.styles import Border, Side
 
 from helper import reverse_map
 
+tl = Border(left=Side(style='thick'), right=Side(style='thin'), top=Side(style='thick'), bottom=Side(style='thin'))
+tr = Border(left=Side(style='thin'), right=Side(style='thick'), top=Side(style='thick'), bottom=Side(style='thin'))
+br = Border(left=Side(style='thin'), right=Side(style='thick'), top=Side(style='thin'), bottom=Side(style='thick'))
+bl = Border(left=Side(style='thick'), right=Side(style='thin'), top=Side(style='thin'), bottom=Side(style='thick'))
+
+ml = Border(left=Side(style='thick'), right=Side(style='thin'), top=Side(style='thin'), bottom=Side(style='thin'))
+mr = Border(left=Side(style='thin'), right=Side(style='thick'), top=Side(style='thin'), bottom=Side(style='thin'))
+mt = Border(left=Side(style='thin'), right=Side(style='thin'), top=Side(style='thick'), bottom=Side(style='thin'))
+mb = Border(left=Side(style='thin'), right=Side(style='thin'), top=Side(style='thin'), bottom=Side(style='thick'))
+cc = Border(left=Side(style='thin'), right=Side(style='thin'), top=Side(style='thin'), bottom=Side(style='thin'))
+
+border_delta_map = {
+    (0, 0): tl,
+    (1, 0): ml,
+    (2, 0): bl,
+    (0, 1): mt,
+    (0, 2): tr,
+    (1, 2): mr,
+    (2, 1): mb,
+    (2, 2): br,
+    (1, 1): cc
+}
+
+
+def apply_borders_2(file_path):
+    wb = xl.load_workbook(file_path)
+    sheet = wb['Sheet1']
+    for r in range(3):
+        for c in range(3):
+            for rd in range(3):
+                for cd in range(3):
+                    sheet.cell(r * 3 + 2 + rd, c * 3 + 2 + cd).border = border_delta_map[(rd, cd)]
+
+    wb.save(file_path)
+
 
 def apply_borders(file_path):
     wb = xl.load_workbook(file_path)
     sheet = wb['Sheet1']
-    thin_border = Border(left=Side(style='thin'),
-                         right=Side(style='thin'),
-                         top=Side(style='thin'),
-                         bottom=Side(style='thin'))
+    thin_border = Border(
+        left=Side(style='thin'), right=Side(style='thin'), top=Side(style='thin'), bottom=Side(style='thin'))
 
-    left_thick_border = Border(left=Side(style='thick'),
-                               right=Side(style='thin'),
-                               top=Side(style='thin'),
-                               bottom=Side(style='thin')
-                               )
-    top_thick_border = Border(left=Side(style='thin'),
-                              right=Side(style='thin'),
-                              top=Side(style='thick'),
-                              bottom=Side(style='thin'))
+    left_thick_border = Border(
+        left=Side(style='thick'), right=Side(style='thin'), top=Side(style='thin'), bottom=Side(style='thin'))
+    top_thick_border = Border(
+        left=Side(style='thin'), right=Side(style='thin'), top=Side(style='thick'), bottom=Side(style='thin'))
 
     for r in range(2, 10):
         for c in range(2, 10):

@@ -6,7 +6,7 @@ import pandas as pd
 from candidate_cells_for_digit import candidate_cells_for_digit, update_with_candidate_cells_for_digit_method
 from candidate_digits_for_cell import update_with_candidate_digits_for_cell_method
 from helper import read_input, update_arr, reverse_map, update_arr_using_reversed_map
-from excel_helper import apply_borders, reformat_excel, print_candidates_in_excel
+from excel_helper import apply_borders, reformat_excel, print_candidates_in_excel, apply_borders_2
 from implicit_certainty import remove_candidates_by_implicit_certainty
 from linear_alignment import remove_candidates_impacted_by_linear_alignment
 from stage3 import remove_candidates_by_rows, remove_candidates_by_cols
@@ -50,5 +50,6 @@ if __name__ == '__main__':
     output_df.to_excel(output_path)
     reformat_excel(output_path)
     print_candidates_in_excel(output_path, candidates)
-    apply_borders(output_path)
+    # apply_borders(output_path)
+    apply_borders_2(output_path)
     # print(f"==========\n{arr}\n==============")
