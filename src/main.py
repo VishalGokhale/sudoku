@@ -6,7 +6,7 @@ import pandas as pd
 from candidate_cells_for_digit import candidate_cells_for_digit, update_with_candidate_cells_for_digit_method
 from candidate_digits_for_cell import update_with_candidate_digits_for_cell_method
 from helper import read_input, update_arr, reverse_map, update_arr_using_reversed_map
-from excel_helper import apply_borders, reformat_excel, print_candidates_in_excel, apply_borders_2
+from excel_helper import apply_borders, reformat_excel, print_candidates_in_excel, apply_borders
 from implicit_certainty import remove_candidates_by_implicit_certainty
 from linear_alignment import remove_candidates_impacted_by_linear_alignment
 from stage3 import remove_candidates_by_rows, remove_candidates_by_cols
@@ -32,9 +32,9 @@ if __name__ == '__main__':
         candidates = candidate_cells_for_digit(arr)
         remove_candidates_by_implicit_certainty(candidates, arr)
         update_arr(arr, candidates)
-        candidates = candidate_cells_for_digit(arr)
+        # candidates = candidate_cells_for_digit(arr)
         update_arr_using_reversed_map(candidates, arr)
-        candidates = candidate_cells_for_digit(arr)
+        # candidates = candidate_cells_for_digit(arr)
 
         if np.array_equal(arr_copy, arr):
             print(f"{iterations = } completed\n\nNo updates compared to previous state, exiting...")
@@ -51,5 +51,5 @@ if __name__ == '__main__':
     reformat_excel(output_path)
     print_candidates_in_excel(output_path, candidates)
     # apply_borders(output_path)
-    apply_borders_2(output_path)
+    apply_borders(output_path)
     # print(f"==========\n{arr}\n==============")

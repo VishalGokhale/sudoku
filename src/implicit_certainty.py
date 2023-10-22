@@ -33,10 +33,9 @@ def remove_candidates_by_implicit_certainty(candidates, arr):
             a = set(digits)
             b = set(candidates_reversed[(smr, smc)])
             c = b - a
+            # if smr == 0 and smc == 2:
+            #     print(f"{c=}, {cell_tuples=}")
             for x in c:
                 for ct in cell_tuples:
                     if ct in candidates[x][(smr, smc)]:
                         candidates[x][(smr, smc)].remove(ct)
-
-
-

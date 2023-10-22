@@ -27,7 +27,7 @@ border_delta_map = {
 }
 
 
-def apply_borders_2(file_path):
+def apply_borders(file_path):
     wb = xl.load_workbook(file_path)
     sheet = wb['Sheet1']
     for r in range(3):
@@ -35,31 +35,6 @@ def apply_borders_2(file_path):
             for rd in range(3):
                 for cd in range(3):
                     sheet.cell(r * 3 + 2 + rd, c * 3 + 2 + cd).border = border_delta_map[(rd, cd)]
-
-    wb.save(file_path)
-
-
-def apply_borders(file_path):
-    wb = xl.load_workbook(file_path)
-    sheet = wb['Sheet1']
-    thin_border = Border(
-        left=Side(style='thin'), right=Side(style='thin'), top=Side(style='thin'), bottom=Side(style='thin'))
-
-    left_thick_border = Border(
-        left=Side(style='thick'), right=Side(style='thin'), top=Side(style='thin'), bottom=Side(style='thin'))
-    top_thick_border = Border(
-        left=Side(style='thin'), right=Side(style='thin'), top=Side(style='thick'), bottom=Side(style='thin'))
-
-    for r in range(2, 10):
-        for c in range(2, 10):
-            sheet.cell(r, c).border = thin_border
-
-    for r in range(4):
-        for c in range(9):
-            sheet.cell(r * 3 + 2, c + 2).border = top_thick_border
-    for c in range(4):
-        for r in range(9):
-            sheet.cell(r + 2, c * 3 + 2).border = left_thick_border
 
     wb.save(file_path)
 
